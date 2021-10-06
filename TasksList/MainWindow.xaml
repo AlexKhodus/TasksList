@@ -13,9 +13,9 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dgTasksList" FontSize="16" FontWeight="Bold" Margin="10"  Grid.ColumnSpan="3" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=CreationDate}" IsReadOnly="False" Header="Дата создания" Width="180" />
-                <DataGridCheckBoxColumn Binding="{Binding Path=IsDone}" IsReadOnly="True" Header="Готовность" Width="100" />
-                <DataGridTextColumn Binding="{Binding Path=TextTodo}" IsReadOnly="True" Header="Описание" Width="*" />
+                <DataGridTextColumn Binding="{Binding Path=CreationDate}" IsReadOnly="True" Header="Дата создания" Width="180" />
+                <DataGridCheckBoxColumn Binding="{Binding Path=IsDone}" Header="Готовность" Width="100" />
+                <DataGridTextColumn Binding="{Binding Path=TextTodo}"  Header="Описание" Width="*" />
 
             </DataGrid.Columns>
         </DataGrid>

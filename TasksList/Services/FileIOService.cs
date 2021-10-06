@@ -34,7 +34,7 @@ namespace TasksList.Services
             }
         }
 
-        public void SaverData(BindingList<TodoModel> todoDataList)
+        public void SaverData(object todoDataList)
         {
             using (StreamWriter writer = File.CreateText(PATH))
             {

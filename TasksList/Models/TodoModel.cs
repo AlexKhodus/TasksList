@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-
+using Newtonsoft.Json;
 
 namespace TasksList.Models
 {
     class TodoModel: INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public DateTime CreationDate { get; set; } = DateTime.Now;
         private bool _isDone;
         private string _textTodo;
+
+        //[JsonProperty(PropertyName)]   допилить имена полей в файлем camelcase
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public DateTime CreationDate { get; set; } = DateTime.Now;
+        
 
 
         public bool IsDone

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TasksList.Models;
+using TasksList.Services;
 
 namespace TasksList
 {
@@ -22,8 +23,9 @@ namespace TasksList
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly string PATH = $"{Environment.CurrentDirectory}\\todoDataList.json";
         private BindingList<TodoModel> _todoDataList;
-
+        private FileIOService _fileIOService;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,11 +33,17 @@ namespace TasksList
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _todoDataList = new BindingList<TodoModel>()
+            _fileIOService = new FileIOService(PATH);
+            try
             {
-                new TodoModel(){TextTodo="test"},
-                new TodoModel(){TextTodo="whatwhat"}
-            };
+                _todoDataList = _fileIOService.LoadData();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                Close();
+            }
 
             dgTasksList.ItemsSource = _todoDataList;
             _todoDataList.ListChanged += _todoDataList_ListChanged;
@@ -46,6 +54,15 @@ namespace TasksList
         {
             if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
             {
+                try
+                {
+                   _fileIOService.SaverData(sender);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Close();
+                }
 
             }
         }
