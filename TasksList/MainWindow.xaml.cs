@@ -22,7 +22,7 @@ namespace TasksList
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BindingList<TodoModel> _todoData;
+        private BindingList<TodoModel> _todoDataList;
 
         public MainWindow()
         {
@@ -31,13 +31,39 @@ namespace TasksList
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _todoData = new BindingList<TodoModel>()
+            _todoDataList = new BindingList<TodoModel>()
             {
                 new TodoModel(){TextTodo="test"},
                 new TodoModel(){TextTodo="whatwhat"}
             };
 
-            dgTasksList.ItemsSource = _todoData;
+            dgTasksList.ItemsSource = _todoDataList;
+            _todoDataList.ListChanged += _todoDataList_ListChanged;
+
+        }
+
+        private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.Reset:
+                    break;
+                case ListChangedType.ItemAdded:
+                    break;
+                case ListChangedType.ItemDeleted:
+                    break;
+                case ListChangedType.ItemMoved:
+                    break;
+                case ListChangedType.ItemChanged:
+                    break;
+                case ListChangedType.PropertyDescriptorAdded:
+                    break;
+                case ListChangedType.PropertyDescriptorDeleted:
+                    break;
+                case ListChangedType.PropertyDescriptorChanged:
+                    break;
+                default:
+            }
 
         }
     }

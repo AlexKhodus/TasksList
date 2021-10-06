@@ -3,25 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+
 
 namespace TasksList.Models
 {
-    class TodoModel
+    class TodoModel: INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public DateTime CreationDate { get; set; } = DateTime.Now;
         private bool _isDone;
         private string _textTodo;
 
-        public string TextTodo
-        {
-            get { return _textTodo; }
-            set { _textTodo = value; }
-        }
 
         public bool IsDone
         {
             get { return _isDone; }
-            set { _isDone = value; }
+            set
+                {
+                    if (_isDone == value)
+                        return;
+                    _isDone = value;
+                    OnPropertyChanged("IsDone");
+                }
+        }
+        public string TextTodo
+        {
+            get { return _textTodo; }
+            set
+                {
+                    if (_textTodo == value)
+                        return;
+                    _textTodo = value;
+                    OnPropertyChanged("TextTodo");
+                }
+
+        }
+        protected virtual void OnPropertyChanged(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
